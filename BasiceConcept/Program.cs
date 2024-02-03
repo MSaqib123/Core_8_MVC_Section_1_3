@@ -46,11 +46,41 @@ var app = builder.Build();
 
 //===== 3. Request_Header ======= oposite
 #region Request_Header opposite
+//app.Run(async (HttpContext context) =>
+//{
+//    //Requst Path
+//    var path = context.Request.Path;
+//    //Requst Method (get,post)
+//    var mathod = context.Request.Method;
+//    await context.Response.WriteAsync($"<h1>{path}</h1>");
+//    await context.Response.WriteAsync($"<h1>{mathod}</h1>");
+//});
+#endregion
+
+//===== 3. Request_Header Query_String ======= 
+#region Query_String
+//app.Run(async (HttpContext context) =>
+//{
+//    if (context.Request.Method == "GET")
+//    {
+//        if (context.Request.Query.ContainsKey("id"))
+//        {
+//            string id = context.Request.Query["id"];
+//            await context.Response.WriteAsync($"{id}");
+//        }
+//    }
+//});
+#endregion
+
+//===== 4. Request_Header Importent Keys ======= 
 app.Run(async (HttpContext context) =>
 {
-    var path = context.Request.Path;
-    await context.Response.WriteAsync($"<h1>{path}</h1>");
+    if (context.Request.Headers.ContainsKey("User-Agent"))
+    {
+        string userAgent = context.Request.Headers["User-Agent"];
+        await context.Response.WriteAsync($"<p>{userAgent}</p>");
+    }
 });
-#endregion
+
 
 app.Run();
