@@ -7,7 +7,7 @@ var app = builder.Build();
 //============ Section #  HttpContext ============
 //================================================
 //Divided into 3 section
-//1. General
+//1. General (status header)
 //2. Response Header
 //3. Request Headers
 
@@ -33,13 +33,23 @@ var app = builder.Build();
 
 //===== 2. Response Header =======
 #region ResponseHeader
-app.Run(async (HttpContext context) => 
+////Date , Server , Content-Type , Content-Length
+//app.Run(async (HttpContext context) => 
+//{
+//    //Header are iheaderDictunary  (keyvaluePair)
+//    context.Response.Headers["MyKye_Pakistan"] = "Hum Zindaa Qoom";
+//    context.Response.Headers["Content-Type"] = "text/html";
+//    await context.Response.WriteAsync("<h1>Hello</h1>");
+//    await context.Response.WriteAsync("<h2>Hello</h2>");
+//});
+#endregion
+
+//===== 3. Request_Header ======= oposite
+#region Request_Header opposite
+app.Run(async (HttpContext context) =>
 {
-    //Header are iheaderDictunary  (keyvaluePair)
-    context.Response.Headers["MyKye_Pakistan"] = "Hum Zindaa Qoom";
-    context.Response.Headers["Content-Type"] = "text/html";
-    await context.Response.WriteAsync("<h1>Hello</h1>");
-    await context.Response.WriteAsync("<h2>Hello</h2>");
+    var path = context.Request.Path;
+    await context.Response.WriteAsync($"<h1>{path}</h1>");
 });
 #endregion
 
